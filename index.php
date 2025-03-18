@@ -6,9 +6,10 @@
   $db_host     = getenv(strtoupper($db_service)."_SERVICE_HOST");
   $db_port     = getenv(strtoupper($db_service)."_SERVICE_PORT");
   $message     = getenv('HELLO_MESSAGE');
+  $audience    = getenv('HELLO_AUDIENCE');
 ?>
 
-<h1><?php echo "$message" ?></h1>
+<h1><?php echo "$message" "audience" "!"?></h1>
 
 <table border="1">
 <tr>

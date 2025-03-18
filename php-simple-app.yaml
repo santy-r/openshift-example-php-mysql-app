@@ -1,7 +1,8 @@
 kind: Template
 apiVersion: v1
 metadata:
-  name: php-app
+  name: ex288-php-mysql
+  namespace: indy
   annotations:
     description: A simple PHP application with MySQL database
     tags: php,mysql
@@ -57,7 +58,7 @@ objects:
           from:
             kind: ImageStreamTag
             namespace: ${NAMESPACE}
-            name: php:5.6
+            name: php:latest
           env:
             - name: COMPOSER_MIRROR
               value: ${COMPOSER_MIRROR}
@@ -115,6 +116,8 @@ objects:
                   value: ${DATABASE_PASSWORD}
                 - name: HELLO_MESSAGE
                   value: ${HELLO_MESSAGE}
+                - name: HELLO_AUDIENCE
+                  value: ${HELLO_AUDIENCE}
               resources:
                 limits:
                   memory: ${MEMORY_LIMIT}
@@ -149,7 +152,7 @@ objects:
             from:
               kind: ImageStreamTag
               namespace: ${NAMESPACE}
-              name: mysql:5.6
+              name: mysql:latest
         - type: ConfigChange
       replicas: 1
       selector:
@@ -217,7 +220,7 @@ parameters:
     displayName: Git Repository URL
     description: The URL of the repository with your application source code.
     required: true
-    value: git@git.elostech.cz:OpenShift/php-app.git
+    value: https://github.com/santy-r/openshift-example-php-mysql-app
   - name: SOURCE_REPOSITORY_REF
     displayName: Git Reference
     description: >-
@@ -232,7 +235,7 @@ parameters:
     description: >-
       The exposed hostname that will route to PHP app service, if left blank a
       value will be defaulted.
-    value: php-app.oseapps.elostech.cz
+    value: php-template.apps.ocp4.example.com
   - name: GITHUB_WEBHOOK_SECRET
     displayName: GitHub Webhook Secret
     description: A secret string used to configure the GitHub webhook.
@@ -257,7 +260,11 @@ parameters:
   - name: HELLO_MESSAGE
     displayName: Hello Message
     description: Hello Message.
-    value: Ahoj!
+    value: Bonjour
+  - name: HELLO_AUDIENCE
+    displayName: Hello Audience
+    description: Hello Audience.
+    value: Engineer
   - name: COMPOSER_MIRROR
     displayName: Custom Composer Mirror URL
     description: The custom Composer mirror URL

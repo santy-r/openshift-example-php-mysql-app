@@ -1,8 +1,8 @@
+apiVersion: template.openshift.io/v1
 kind: Template
-apiVersion: v1
 metadata:
   name: ex288-php-mysql
-  namespace: indy
+#  namespace: php-template
   annotations:
     description: A simple PHP application with MySQL database
     tags: php,mysql
@@ -235,7 +235,8 @@ parameters:
     description: >-
       The exposed hostname that will route to PHP app service, if left blank a
       value will be defaulted.
-    value: php-template.apps.ocp4.example.com
+    value: 
+#    value: php-template.apps.ocp4.example.com
   - name: GITHUB_WEBHOOK_SECRET
     displayName: GitHub Webhook Secret
     description: A secret string used to configure the GitHub webhook.
